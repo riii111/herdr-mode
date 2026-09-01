@@ -86,15 +86,27 @@ def test_kitty_load_config():
         print("kitty load_config: skipped (kitty not installed)")
         return
 
-    subprocess.run(
+    result = subprocess.run(
         [
             "kitty",
             "+runpy",
             "import runpy; runpy.run_path('tests/kitty_load_config.py', run_name='__main__')",
         ],
-        check=True,
         cwd=str(REPO_ROOT),
+        capture_output=True,
+        text=True,
     )
+    if result.returncode != 0:
+        combined = result.stdout + result.stderr
+        if "The map option --timeout is unknown" in combined:
+            print("kitty load_config: skipped (kitty too old for --timeout)")
+            return
+        sys.stderr.write(combined)
+        raise subprocess.CalledProcessError(
+            result.returncode, result.args, result.stdout, result.stderr
+        )
+    if result.stdout:
+        sys.stdout.write(result.stdout)
 
 
 def shutil_which(name):

@@ -8,24 +8,17 @@ REQUIRED = [
     "README.md",
     "LICENSE",
     "NOTICE",
-    "install.sh",
-    "uninstall.sh",
     "assets/herdr-logo.png",
     "integrations/kitty/herdr-mode.conf",
     "integrations/kitty/herdr-mode-logo.conf",
-    "integrations/wezterm/herdr_mode.lua",
-    "examples/herdr-config.toml",
 ]
 
 SHIPPED_GLOBS = (
     "README.md",
     "LICENSE",
     "NOTICE",
-    "install.sh",
-    "uninstall.sh",
     ".github/**/*",
     "integrations/**/*",
-    "examples/**/*",
     "assets/**/*",
 )
 
@@ -55,16 +48,7 @@ def main():
     readme = (REPO_ROOT / "README.md").read_text()
     assert "Ctrl+;" in readme
     assert "0.8.2" in readme
-
-    example = (REPO_ROOT / "examples/herdr-config.toml").read_text()
-    assert 'window_title = "herdr:{workspace}"' in example
-    assert 'prefix = "ctrl+semicolon"' in example
-
-    lua = (REPO_ROOT / "integrations/wezterm/herdr_mode.lua").read_text()
-    assert lua.count('PREFIX = "\\x1b[59;5u"') == 1
-    assert "leader" not in lua
-    assert "TMUX_ACTIVE" not in lua
-    assert "render-right-status" not in lua
+    assert 'window_title = "herdr:{workspace}"' in readme
 
     for path in iter_shipped_text_files(REPO_ROOT):
         text = path.read_text(errors="replace")

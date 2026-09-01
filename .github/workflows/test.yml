@@ -15,7 +15,13 @@ jobs:
       - name: Install test tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y lua5.4 kitty
+          sudo apt-get install -y xz-utils
+          kitty_ver=0.48.2
+          curl -fsSL -o /tmp/kitty.txz \
+            "https://github.com/kovidgoyal/kitty/releases/download/v${kitty_ver}/kitty-${kitty_ver}-x86_64.txz"
+          mkdir -p "$HOME/.local"
+          tar -xJf /tmp/kitty.txz -C "$HOME/.local"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Run tests
         run: ./tests/run.sh
