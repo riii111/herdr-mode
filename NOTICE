@@ -1,0 +1,23 @@
+herdr-mode
+Copyright 2026 herdr-mode contributors
+
+This product includes software and configuration originally developed
+for personal dotfiles and released under the Apache License, Version 2.0.
+
+---------------------------------------------------------------------------
+
+Herdr logo
+
+Herdr logo © Herdr contributors, licensed under Apache-2.0. Modified for visibility.
+
+Original:
+  https://github.com/herdrdev/herdr/blob/v0.8.0/assets/logo.png
+
+This repository uses a derivative of that image only as a visual
+indicator while Herdr mode is active. It is not a brand logo for
+herdr-mode itself.
+
+Modifications:
+  Recolored for contrast against dark terminal backgrounds.
+  Scaled via kitty window_logo_scale so the visible size stays small
+  even with transparent padding in the source image.
